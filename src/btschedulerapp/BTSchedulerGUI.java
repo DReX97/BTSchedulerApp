@@ -26,17 +26,235 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        titleLbl = new javax.swing.JLabel();
+        patientIDLbl = new javax.swing.JLabel();
+        nameLbl = new javax.swing.JLabel();
+        ageLbl = new javax.swing.JLabel();
+        gpLbl = new javax.swing.JLabel();
+        wardLbl = new javax.swing.JLabel();
+        pLevelLbl = new javax.swing.JLabel();
+        patientIDTf = new javax.swing.JTextField();
+        nameTf = new javax.swing.JTextField();
+        ageTf = new javax.swing.JTextField();
+        gpTf = new javax.swing.JTextField();
+        wardRb1 = new javax.swing.JRadioButton();
+        wardRb2 = new javax.swing.JRadioButton();
+        priorityCb = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outputTa = new javax.swing.JTextArea();
+        addBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
+        numPBtn = new javax.swing.JButton();
+        listBtn = new javax.swing.JButton();
+        removeBtn = new javax.swing.JButton();
+        seacrhBtn = new javax.swing.JButton();
+        markAbsentBtn = new javax.swing.JButton();
+        absentBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
+
+        titleLbl.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        titleLbl.setText("BLOOD TEST CENTER");
+
+        patientIDLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        patientIDLbl.setText("Patient ID:");
+
+        nameLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        nameLbl.setText("Patient Name:");
+
+        ageLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ageLbl.setText("Age:");
+
+        gpLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        gpLbl.setText("GP Doctor:");
+
+        wardLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        wardLbl.setText("From a Ward?");
+
+        pLevelLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        pLevelLbl.setText("Priority Level:");
+
+        buttonGroup1.add(wardRb1);
+        wardRb1.setText("Yes");
+
+        buttonGroup1.add(wardRb2);
+        wardRb2.setText("No");
+
+        priorityCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        outputTa.setColumns(20);
+        outputTa.setRows(5);
+        jScrollPane1.setViewportView(outputTa);
+
+        addBtn.setBackground(new java.awt.Color(51, 255, 51));
+        addBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        addBtn.setText("ADD PATIENT");
+
+        clearBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        clearBtn.setText("CLEAR");
+
+        exitBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        exitBtn.setText("(X)  EXIT");
+
+        numPBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        numPBtn.setText("No. of Patients");
+
+        listBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        listBtn.setText("List Patients");
+
+        removeBtn.setBackground(new java.awt.Color(255, 0, 51));
+        removeBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        removeBtn.setText("Next Patient");
+
+        seacrhBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        seacrhBtn.setText("SEACRH PATIENT (ID)");
+
+        markAbsentBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        markAbsentBtn.setText("Mark Absent");
+
+        absentBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
+        absentBtn.setText("Show Absence");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(titleLbl)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(markAbsentBtn)
+                        .addGap(33, 33, 33)
+                        .addComponent(absentBtn)
+                        .addGap(138, 138, 138))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(patientIDLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(ageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(gpLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(wardLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                                        .addComponent(pLevelLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(44, 44, 44)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(patientIDTf, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nameTf, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                                        .addComponent(ageTf)
+                                        .addComponent(gpTf))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(wardRb1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(wardRb2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(priorityCb, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(removeBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(seacrhBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                .addComponent(addBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 84, Short.MAX_VALUE)
+                                .addComponent(numPBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(listBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(exitBtn)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                        .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addGap(61, 61, 61))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(markAbsentBtn)
+                            .addComponent(absentBtn)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(titleLbl)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(patientIDTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(patientIDLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ageTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ageLbl))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(gpLbl)
+                            .addComponent(gpTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(wardLbl)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(wardRb1)
+                                .addComponent(wardRb2)))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pLevelLbl)
+                            .addComponent(priorityCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(addBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(clearBtn)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(removeBtn))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(numPBtn)
+                            .addComponent(listBtn))))
+                .addGap(18, 18, 18)
+                .addComponent(seacrhBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitBtn)
+                .addGap(16, 16, 16))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -78,5 +296,32 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton absentBtn;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JLabel ageLbl;
+    private javax.swing.JTextField ageTf;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton clearBtn;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JLabel gpLbl;
+    private javax.swing.JTextField gpTf;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton listBtn;
+    private javax.swing.JButton markAbsentBtn;
+    private javax.swing.JLabel nameLbl;
+    private javax.swing.JTextField nameTf;
+    private javax.swing.JButton numPBtn;
+    private javax.swing.JTextArea outputTa;
+    private javax.swing.JLabel pLevelLbl;
+    private javax.swing.JLabel patientIDLbl;
+    private javax.swing.JTextField patientIDTf;
+    private javax.swing.JComboBox<String> priorityCb;
+    private javax.swing.JButton removeBtn;
+    private javax.swing.JButton seacrhBtn;
+    private javax.swing.JLabel titleLbl;
+    private javax.swing.JLabel wardLbl;
+    private javax.swing.JRadioButton wardRb1;
+    private javax.swing.JRadioButton wardRb2;
     // End of variables declaration//GEN-END:variables
 }
