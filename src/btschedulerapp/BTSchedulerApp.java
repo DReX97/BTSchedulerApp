@@ -12,6 +12,8 @@ public class BTSchedulerApp {
 
     public static void main(String[] args) {
         // TODO code application logic here
+        BTSchedulerGUI myGUI = new BTSchedulerGUI();
+        myGUI.setVisible(true);
     }
     
 }
