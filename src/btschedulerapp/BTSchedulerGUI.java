@@ -135,16 +135,36 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
 
         numPBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         numPBtn.setText("No. of Patients");
+        numPBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numPBtnActionPerformed(evt);
+            }
+        });
 
         listBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         listBtn.setText("List Patients");
+        listBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listBtnActionPerformed(evt);
+            }
+        });
 
         removeBtn.setBackground(new java.awt.Color(255, 0, 51));
         removeBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         removeBtn.setText("Next Patient");
+        removeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeBtnActionPerformed(evt);
+            }
+        });
 
         seacrhBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         seacrhBtn.setText("SEACRH PATIENT (ID)");
+        seacrhBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seacrhBtnActionPerformed(evt);
+            }
+        });
 
         markAbsentBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         markAbsentBtn.setText("Mark Absent");
@@ -346,7 +366,7 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
             pTree.insertNode(pTree.root(), newNode);
 
             //Append a confirmation message to the output text area
-            outputTa.append(nameTf.getText() + " has been added for Blood Test in Patient List\n");
+            outputTa.append(">>>>> "+nameTf.getText() + " has been added for Blood Test <<<<<\n");
             //Clear the input fields for the next entry
             patientIDTf.setText("");
             nameTf.setText("");
@@ -391,7 +411,7 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
         
         if (!Queue.isEmpty()) { 
         //Display header to clearly indicate no-show list
-        outputTa.append("Last 5 Absence:\n");
+        outputTa.append(">>>>>  Last 5 Absence  <<<<<\n");
         
         //Retrieve and display the list of no-show patients using the Queue ADT
         outputTa.append(((MyQueue) Queue).printQueue()); 
@@ -408,8 +428,60 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        System.exit(0);//exit the GUI
     }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
+        // TODO add your handling code here:
+        if (PQueue.isEmpty()) {
+            outputTa.append("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+            outputTa.append("\n*****No more patient's to test blood!*****\n");
+        }else{
+            PQElement pElement = (PQElement)PQueue.dequeue();//Remove the highest priority patient from the queue
+            Patient person = (Patient)pElement.getPatient();//Retrieve the Patient object from the dequeued element
+            outputTa.append("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+            outputTa.append(person.getGp()+" completed blood test for: "+person.getsName()+"\n");
+            outputTa.append("Priority: "+pElement.getiKey()+"\n");
+            outputTa.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        }
+    }//GEN-LAST:event_removeBtnActionPerformed
+
+    private void numPBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numPBtnActionPerformed
+        outputTa.append("~~~~~~~~~~~~~~~~~~~~~~\n");
+        outputTa.append(PQueue.size()+" Patient's in the list\n");
+        outputTa.append("~~~~~~~~~~~~~~~~~~~~~~\n");
+    }//GEN-LAST:event_numPBtnActionPerformed
+
+    private void listBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listBtnActionPerformed
+        outputTa.append("*****   Patient-List   *****\n");
+        outputTa.append(PQueue.printPQueue()+"\n");
+        outputTa.append("~~~~~~~~~~~~~~~~~~~~~~\n");
+    }//GEN-LAST:event_listBtnActionPerformed
+
+    private void seacrhBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seacrhBtnActionPerformed
+        try {
+            //Prompt the user to enter a Patient ID (input is a String, then converted to an int)
+            int searchID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Patient ID: "));
+
+            //Recursively search the binary tree for a node with the given Patient ID
+            BTNode node = pTree.search(searchID, pTree.root());
+
+            if(node != null) {
+                //If the node is found, retrieve the Patient object from it
+                Patient pSearch = node.getPatient();
+                //Display a message indicating that the patient was found along with their details
+                outputTa.append("\n>>>>>PATIENT FOUND<<<<<\n");
+                outputTa.append("~~ID: " + pSearch.getPatientID() + "\n~~Name: " + pSearch.getsName() + "\n~~Age: " + pSearch.getAge() +
+                                "\n~~GP DOCTOR: " + pSearch.getGp() + "\n~~From a ward? " + (pSearch.isWard() ? "Yes" : "No") + "\n");
+            } else {
+                //If no matching node is found, display a message indicating that the Patient ID was not found
+                outputTa.append("\n>>>>> Patient ID " + searchID + " not found!\n");
+            }
+        }catch(NumberFormatException searchNum) {
+            //If the input cannot be converted to an integer, show an error message to the user
+            JOptionPane.showMessageDialog(null, "Invalid Input! \nPlease enter ID Number.");
+        }
+    }//GEN-LAST:event_seacrhBtnActionPerformed
 
     /**
      * @param args the command line arguments

@@ -365,6 +365,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="No. of Patients"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="numPBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="listBtn">
           <Properties>
@@ -373,6 +376,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="List Patients"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="removeBtn">
           <Properties>
@@ -384,6 +390,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Next Patient"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="seacrhBtn">
           <Properties>
@@ -392,6 +401,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="SEACRH PATIENT (ID)"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="seacrhBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="markAbsentBtn">
           <Properties>
