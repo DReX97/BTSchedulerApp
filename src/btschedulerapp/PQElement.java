@@ -44,11 +44,11 @@ public class PQElement {
     public String printPatient() {
         String sMessage;
         // Dummy: Create a message with patient details
-        sMessage = "|ID: " + patient.getPatientID() +
-                   "\n|Patient: " + patient.getsName() +
-                   "\n|Age: " + patient.getAge() +
-                   "\n|GP Details: " + patient.getGp() +
-                   "\n|From Ward(yes or no): " + (patient.isWard() ? "Yes" : "No");
+        sMessage = "\n--ID: " + patient.getPatientID() +
+                   "\n--Patient: " + patient.getsName() +
+                   "\n--Age: " + patient.getAge() +
+                   "\n--GP Details: " + patient.getGp() +
+                   "\n--From Ward(yes or no): " + (patient.isWard() ? "Yes" : "No");
         return sMessage; // Dummy: return the formatted string
     }
     

@@ -82,7 +82,7 @@ public class MyPriorityQueue implements PQInterface{
             // Convert the priority key to a string
             String sPriority = Integer.toString(thePQueue.get(iCount).getiKey());
             // Append the patient details and their priority to the message
-            sMessage += sDetails + "\n|Patient's Priority Level: " + sPriority + "\n";
+            sMessage += sDetails + "\n--Patient's Priority Level: " + sPriority + "\n";
         }
         return sMessage; // Return the complete message with all patients
     }
