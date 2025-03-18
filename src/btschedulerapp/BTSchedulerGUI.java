@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package btschedulerapp;
+import static java.lang.Integer.parseInt;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,11 +13,25 @@ package btschedulerapp;
  */
 public class BTSchedulerGUI extends javax.swing.JFrame {
 
+    //Declare our data structure interfaces
+    private QueueInterface Queue;         //This is for storing the last 5 no-shows (FIFO behavior)
+    private PQInterface PQueue;           //Used this scheduling patients based on priority
+    private BinaryTree pTree;             //Used this for storing patient records in a binary tree (for recursive search)
     /**
      * Creates new form BTSchedulerGUI
      */
     public BTSchedulerGUI() {
         initComponents();
+        Queue = new MyQueue(); //create a new queue for no-show patients
+        PQueue = new MyPriorityQueue();//create a new priority queue for patient scheduling
+        pTree = new BinaryTree();
+        
+        //Set up the combo box model with priority options
+        DefaultComboBoxModel<String> priorityModel = new DefaultComboBoxModel<>();
+        priorityModel.addElement("Urgent");  // Highest priority
+        priorityModel.addElement("Medium");  // Middle priority
+        priorityModel.addElement("Low");     // Lowest priority
+        priorityCb.setModel(priorityModel);
     }
 
     /**
@@ -94,12 +111,27 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
         addBtn.setBackground(new java.awt.Color(51, 255, 51));
         addBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         addBtn.setText("ADD PATIENT");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBtnActionPerformed(evt);
+            }
+        });
 
         clearBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         clearBtn.setText("CLEAR");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
 
         exitBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         exitBtn.setText("(X)  EXIT");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBtnActionPerformed(evt);
+            }
+        });
 
         numPBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         numPBtn.setText("No. of Patients");
@@ -116,9 +148,19 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
 
         markAbsentBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         markAbsentBtn.setText("Mark Absent");
+        markAbsentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                markAbsentBtnActionPerformed(evt);
+            }
+        });
 
         absentBtn.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         absentBtn.setText("Show Absence");
+        absentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                absentBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,6 +301,115 @@ public class BTSchedulerGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            int patientID;
+            String sName;
+            String gp;
+            int age;
+            boolean ward;
+
+            Patient newP = new Patient();
+
+            patientID = parseInt(patientIDTf.getText());//Parse Patient ID from text field
+            sName = nameTf.getText();
+            gp = gpTf.getText();
+            age = parseInt(ageTf.getText());
+            ward = wardRb1.isSelected();//Determine ward status from radio button (true if wardRb1 is selected)
+            //Retrieve selected priority from combo box
+            String selectedPriority = (String) priorityCb.getSelectedItem();
+            int iPriority = 0;
+            
+            //Map the string priority to a numeric value
+            if (selectedPriority.equalsIgnoreCase("Urgent")) {
+                iPriority = 3; //Most urgent
+            } else if (selectedPriority.equalsIgnoreCase("Medium")) {
+                iPriority = 2;
+            } else if (selectedPriority.equalsIgnoreCase("Low")) {
+                iPriority = 1;
+            }
+
+            //Set patient details into the new Patient object
+            newP.setPatientID(patientID);
+            newP.setsName(sName);
+            newP.setGp(gp);
+            newP.setAge(age);
+            newP.setWard(ward);
+
+            //Enqueue the patient into the Priority Queue with the numeric priority
+            PQueue.enqueue(iPriority, newP);
+
+            //Insert the new Patient node into the Binary Tree
+            BTNode newNode = new BTNode(newP);
+            pTree.insertNode(pTree.root(), newNode);
+
+            //Append a confirmation message to the output text area
+            outputTa.append(nameTf.getText() + " has been added for Blood Test in Patient List\n");
+            //Clear the input fields for the next entry
+            patientIDTf.setText("");
+            nameTf.setText("");
+            gpTf.setText("");
+            ageTf.setText("");
+            //Reset the priority combo box to its default option
+            priorityCb.setSelectedIndex(0);
+            //Reset ward radio buttons (set wardRb1 to false, wardRb2 to true as default)
+            wardRb1.setSelected(false);
+            wardRb2.setSelected(true);
+        }
+        catch(NumberFormatException oops){
+            //Display an error message if a numeric parse fails
+            JOptionPane.showMessageDialog(null, ">>>>> INVALID INPUT <<<<<\n Please ensure Patient ID, Age and Priority are numbers!");
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
+
+    private void markAbsentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_markAbsentBtnActionPerformed
+        
+        //check if there's at least one patient waiting in the priority queue
+        if (!PQueue.isEmpty()) { 
+            // Remove patient from priority queue (patient who missed appointment)
+            PQElement noPatientElement = (PQElement) PQueue.dequeue();
+            Patient noPatient = noPatientElement.getPatient();
+
+            //adds patient's name to the Queue of last 5 no-shows (FIFO behavior)
+            Queue.enqueue(noPatient.getsName());
+
+            //Inform the user
+            outputTa.append("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            outputTa.append("\n"+noPatient.getsName() + " marked as absent and removed from the list.\n");
+            outputTa.append("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+        } else {
+            //Clearly inform user if no patient is in priority queue
+            outputTa.append("`````````````````````````````\n");
+            outputTa.append("No patient is currently waiting.\n");
+            outputTa.append("`````````````````````````````\n");
+        }
+    }//GEN-LAST:event_markAbsentBtnActionPerformed
+
+    private void absentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absentBtnActionPerformed
+        
+        if (!Queue.isEmpty()) { 
+        //Display header to clearly indicate no-show list
+        outputTa.append("Last 5 Absence:\n");
+        
+        //Retrieve and display the list of no-show patients using the Queue ADT
+        outputTa.append(((MyQueue) Queue).printQueue()); 
+        }else{
+            outputTa.append("\n**********************\n");
+            outputTa.append("No absence recorded.\n");
+            outputTa.append("\n**********************\n");
+        }
+    }//GEN-LAST:event_absentBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        outputTa.setText("");//clear the text Area
+    }//GEN-LAST:event_clearBtnActionPerformed
+
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     /**
      * @param args the command line arguments

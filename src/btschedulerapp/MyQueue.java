@@ -53,4 +53,14 @@ public class MyQueue implements QueueInterface{
             return null;
         }
     }
+    
+    //Returns a string representation of all items in the queue.
+    public String printQueue() {
+        String result = ""; // Start with an empty string to accumulate items.
+        // Loop through each no-show in the queue.
+        for (String noShow : theQueue) {
+            result += noShow + "\n"; // Append each no-show with a newline.
+        }
+        return result; // Return the complete string.
+    }
 }
